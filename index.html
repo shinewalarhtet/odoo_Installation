@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Odoo Installation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
+    <script src="./scripts.js"></script>
+  </head>
+  <body>
+    <!-- <div class="mb-4 p-3 bg-gradient position-top">
+        <h1 class="text-center"><span class="border rounded p-1">ODOO</span> Installation on Ubuntu</h1>
+    </div> -->
+    <nav class="navbar navbar-expand-lg bg-custom-gradient sticky-top">
+        <div class="container-fluid">
+            <strong class="navbar-brand text-white">
+                <span class="border rounded p-1">ODOO</span> Installation on Ubuntu
+            </strong>
+          <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button> -->
+          <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div> -->
+        </div>
+      </nav>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <div class="position-fixed">
+                        <h3>Content</h3>
+                        <ol type="1">
+                            <li class="py-2 pe-2 content-menu-tag" id="env-installation-tag"><a href="#env-installation" class="text-decoration-none text-white content-menu-link">Set Up the Installation Environment</a></li>
+                            <li class="py-2 pe-2 content-menu-tag" id="postgres-tag"><a href="#postgres" class="text-decoration-none text-white content-menu-link">Install and Configure PostgreSQL</a></li>
+                            <li class="py-2 pe-2 content-menu-tag" id="wkhtmltopdf-tag"><a href="#wkhtmltopdf" class="text-decoration-none text-white content-menu-link">Install Wkhtmltopdf</a></li>
+                            <li class="py-2 pe-2 content-menu-tag" id="odoo-tag"><a href="#odoo" class="text-decoration-none text-white content-menu-link">Install Odoo</a></li>
+                            <li class="py-2 pe-2 content-menu-tag" id="service-tag"><a href="#service" class="text-decoration-none text-white content-menu-link">Create a Service Unit File</a></li>
+                            <li class="py-2 pe-2 content-menu-tag" id="interface-tag"><a href="#interface" class="text-decoration-none text-white content-menu-link">Access Web Interface</a></li>
+                        </ol>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input active" type="checkbox" role="switch" id="darkmode-switch" checked>
+                            <label class="form-check-label" for="darkmode-switch" id="switch-label">Change Light Mode</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8">
+
+                    <div id="env-installation" class="mb-5 pt-5 content-tag">
+                        <h4>1. Set Up the Installation Environment</h4>
+
+                        <p>1. Update the system packages.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="apt-update">sudo apt update</span>
+                            <a class="copy-btn" data-content="#apt-update" href="#"><i class="bi bi-clipboard copy-text"></i></a>
+                        </div>
+                        
+                        <p>2. Install Git.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="install-git">sudo apt install git -y</span>
+                            <a class="copy-btn" data-content="#install-git" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>3. Install Pip.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="install-pip">sudo apt install python3-pip -y</span>
+                            <a class="copy-btn" data-content="#install-pip" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>4. Install other required dependencies.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="dependencies">sudo apt install -y build-essential wget python3-dev python3-venv python3-wheel libfreetype6-dev libxml2-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less libjpeg-dev zlib1g-dev libpq-dev libxslt1-dev libldap2-dev libtiff5-dev libjpeg8-dev libopenjp2-7-dev liblcms2-dev libwebp-dev libharfbuzz-dev libfribidi-dev libxcb1-dev</span>
+                            <a class="copy-btn" data-content="#dependencies" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>5. Create a new <span class="bg-secondary rounded-pill p-1">odoo</span> user.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="odoo-user">sudo adduser odoo</span>
+                            <a class="copy-btn" data-content="#odoo-user" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                    </div>
+        
+                    <div class="mb-5 pt-5 content-tag" id="postgres">
+                        <h4>2. Install and Configure PostgreSQL</h4>
+
+                        <p>1. Add PostgreSQL Repositories.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="postgres-repo">sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'</span>
+                            <a class="copy-btn" data-content="#postgres-repo" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>2. Download PostgreSQL.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="download-postgres">wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -</span>
+                            <a class="copy-btn" data-content="#download-postgres" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>3. Install PostgreSQL.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="install-postgres">sudo apt install postgresql postgresql-contrib -y</span>
+                            <a class="copy-btn" data-content="#install-postgres" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>4. Start the database server.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="start-postgres">sudo systemctl start postgresql</span>
+                            <a class="copy-btn" data-content="#start-postgres" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>5. Enable the database server to start automatically on system boot.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="enable-postgres">sudo systemctl enable postgresql</span>
+                            <a class="copy-btn" data-content="#enable-postgres" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>6. Change the default PostgreSQL password.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="postgres-pass">sudo passwd postgres</span>
+                            <a class="copy-btn" data-content="#postgres-pass" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>7. Switch to the <span class="bg-secondary rounded-pill p-1">postgres</span> user.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="su-postgres">su - postgres</span>
+                            <a class="copy-btn" data-content="#su-postgres" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>8. Create a database user named <span class="bg-secondary rounded-pill p-1">odoo</span>.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="createuser-odoo">createuser odoo</span>
+                            <a class="copy-btn" data-content="#createuser-odoo" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>9. Go to the PostgreSQL interactive shell.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="psql">psql</span>
+                            <a class="copy-btn" data-content="#psql" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>10. Give the database user <span class="bg-secondary rounded-pill p-1">odoo</span> permission to create databases.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="alter-user-odoo">ALTER USER odoo WITH CREATEDB;</span>
+                            <a class="copy-btn" data-content="#alter-user-odoo" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>11. Exit the interactive shell.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="quit">\q</span>
+                            <a class="copy-btn" data-content="#quit" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>12. Exit from postgres user account.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="exit">exit</span>
+                            <a class="copy-btn" data-content="#exit" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                    </div>
+        
+                    <div class="mb-5 pt-5 content-tag" id="wkhtmltopdf">
+                        <h4>3. Install Wkhtmltopdf</h4>
+
+                        <p>1. Download Wkhtmltopdf from GitHub.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="download-wkhtmltopdf">sudo wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_amd64.deb</span>
+                            <a class="copy-btn" data-content="#download-wkhtmltopdf" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>2. Install Wkhtmltopdf.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="install-wkhtmltopdf">sudo apt install ./wkhtmltox_0.12.6-1.focal_amd64.deb -y</span>
+                            <a class="copy-btn" data-content="#install-wkhtmltopdf" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4 pt-5 content-tag" id="odoo">
+                        <h4>4. Install Odoo</h4>
+
+                        <p>1. Create a directory for Odoo.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="create-odoo-directory">sudo mkdir -p /opt/odoo/odoo</span>
+                            <a class="copy-btn" data-content="#create-odoo-directory" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>2. Set owner to the <span class="bg-secondary rounded-pill p-1">odoo</span> user</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="set-owner-to-odoo">sudo chown -R odoo:odoo /opt/odoo</span>
+                            <a class="copy-btn" data-content="#set-owner-to-odoo" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>3. Switch to the <span class="bg-secondary rounded-pill p-1">odoo</span> user account</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="switch-user-to-odoo">sudo su - odoo</span>
+                            <a class="copy-btn" data-content="#switch-user-to-odoo" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>4. Clone the Odoo 15 source code from GitHub to /opt/odoo/odoo directory.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="clone-odoo">git clone https://www.github.com/odoo/odoo --depth 1 --branch 15.0 /opt/odoo/odoo</span>
+                            <a class="copy-btn" data-content="#clone-odoo" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>5. Go to /opt/odoo</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="go-to-odoo-directory">cd /opt/odoo</span>
+                            <a class="copy-btn" data-content="#go-to-odoo-directory" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>6. Create a new Python virtual environment for Odoo.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="create-python-venv">python3 -m venv odoo-venv</span>
+                            <a class="copy-btn" data-content="#create-python-venv" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>7. Activate the virtual environment.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="activate-python-venv">source odoo-venv/bin/activate</span>
+                            <a class="copy-btn" data-content="#activate-python-venv" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>8. Install wheel</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="install-wheel">pip3 install wheel</span>
+                            <a class="copy-btn" data-content="#install-wheel" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>9. Install all required Python modules with pip3</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="install-requirements">pip3 install -r odoo/requirements.txt</span>
+                            <a class="copy-btn" data-content="#install-requirements" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>10. Deactivate the environment.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="deactivate-venv">deactivate</span>
+                            <a class="copy-btn" data-content="#deactivate-venv" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>11. Create a new directory for 3rd party add-ons.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="custom-addons-directory">mkdir /opt/odoo/odoo-custom-addons</span>
+                            <a class="copy-btn" data-content="#custom-addons-directory" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>12. Exit from odoo user account.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="exit-from-odoo-user">exit</span>
+                            <a class="copy-btn" data-content="#exit-from-odoo-user" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>13. Create a new directory.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="create-odoo-conf-directory">sudo mkdir /etc/odoo</span>
+                            <a class="copy-btn" data-content="#create-odoo-conf-directory" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>14. Create a configuration file.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="create-odoo-conf">sudo nano /etc/odoo/odoo.conf</span>
+                            <a class="copy-btn" data-content="#create-odoo-conf" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>15. Add the following code to the file. Change <span class="bg-info rounded-pill p-1">P@ssw0rd</span> to a unique password.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="odoo-conf">
+                                [options]<br>
+                                ; This is the password that allows database operations:<br>
+                                admin_passwd = <span class="bg-info rounded-pill p-1">P@ssw0rd</span><br>
+                                db_host = False<br>
+                                db_port = False<br>
+                                db_user = odoo<br>
+                                db_password = False<br>
+                                addons_path = /opt/odoo/odoo/addons,/opt/odoo/odoo-custom-addons
+                            </span>
+                            <a class="copy-btn" data-content="#odoo-conf" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+            
+                        <div class="d-flex my-auto mb-4">
+                            <h6>
+                                <span class="my-auto">Press</span>
+                                <span class="shadow-key my-auto">Ctrl</span>
+                                <span class="my-auto mx-2">+</span>
+                                <span class="shadow-key my-auto">X</span>
+                            </h6>
+                        </div>
+            
+                        <div class="d-flex my-auto mb-4">
+                            <h6>
+                                <span class="my-auto">Press</span>
+                                <span class="shadow-key my-auto">Y</span>
+                            </h6>
+                        </div>
+
+                        <div class="d-flex my-auto mb-4">
+                            <h6>
+                                <span class="my-auto">Press</span>
+                                <span class="shadow-key my-auto">Enter</span>
+                            </h6>
+                        </div>
+                        
+                    </div>
+
+                    <div class="mb-5 pt-5 content-tag" id="service">
+                        <h4>4. Create a Service Unit File</h4>
+
+                        <p>1. Create a service unit file called <span class="bg-secondary rounded-pill p-1">odoo.service</span>.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="create-odoo-service">sudo nano /etc/systemd/system/odoo.service</span>
+                            <a class="copy-btn" data-content="#create-odoo-service" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+
+                        <p>2. Add the following code to the file. Close and save the file.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="odoo-service">
+                                [Unit]<br>
+                                Description=Odoo15<br>
+                                Requires=postgresql.service<br>
+                                After=network.target postgresql.service<br>
+                                <br>
+                                [Service]<br>
+                                Type=simple<br>
+                                SyslogIdentifier=odoo<br>
+                                PermissionsStartOnly=true<br>
+                                User=odoo<br>
+                                Group=odoo<br>
+                                ExecStart=/opt/odoo/odoo-venv/bin/python3 /opt/odoo/odoo/odoo-bin -c /etc/odoo/odoo.conf<br>
+                                StandardOutput=journal+console<br>
+                                <br>
+                                [Install]<br>
+                                WantedBy=multi-user.target<br>
+                            </span>
+                            <a class="copy-btn" data-content="#odoo-service" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+            
+                        <div class="d-flex my-auto mb-4">
+                            <h6>
+                                <span class="my-auto">Press</span>
+                                <span class="shadow-key my-auto">Ctrl</span>
+                                <span class="my-auto mx-2">+</span>
+                                <span class="shadow-key my-auto">X</span>
+                            </h6>
+                        </div>
+            
+                        <div class="d-flex my-auto mb-4">
+                            <h6>
+                                <span class="my-auto">Press</span>
+                                <span class="shadow-key my-auto">Y</span>
+                            </h6>
+                        </div>
+
+                        <div class="d-flex my-auto mb-4">
+                            <h6>
+                                <span class="my-auto">Press</span>
+                                <span class="shadow-key my-auto">Enter</span>
+                            </h6>
+                        </div>
+                        
+                        <p>3. Reload system daemon for changes to take effect.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="daemon-reload-service">sudo systemctl daemon-reload</span>
+                            <a class="copy-btn" data-content="#daemon-reload-service" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>4. Start the Odoo service.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="start-odoo-service">sudo systemctl start odoo</span>
+                            <a class="copy-btn" data-content="#start-odoo-service" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                        
+                        <p>5. Enable the service to start on system boot.</p>
+                        <div class="bg-secondary p-3 mb-4 d-flex justify-content-between">
+                            <span id="enable-odoo-service">sudo systemctl enable odoo</span>
+                            <a class="copy-btn" data-content="#enable-odoo-service" href="#"><i class="bi bi-clipboard copy-text"></i></a></i>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-5 pt-5 content-tag" id="interface">
+                        <h4>5. Interface</h4>
+
+                        <p>To access the Odoo web interface, navigate to your server's IP address at port 8069 in your web browser. For example, <span class="bg-secondary rounded-pill p-1">http://Your_IP_Address:8069</span>. You should see the database setup screen:</p>
+                        <div>
+                            <img src="./images/Odoo.png" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>

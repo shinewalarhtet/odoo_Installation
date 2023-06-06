@@ -1,0 +1,31 @@
+body{
+    background: #2C2C2B;
+    color: white;
+}
+
+.bg-custom-gradient{
+    background: linear-gradient(90deg , rgb(141, 3, 141),rgb(9, 9, 170));
+}
+
+.shadow-key {
+    border: 1px solid;
+    padding: 10px;
+    min-width: 40px;
+    box-shadow: 5px 5px;
+  }
+
+.copy-btn{
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
+.copy-btn:hover{
+    color: rgb(68, 68, 253);
+}
+
+.content-active{
+    border-right: 2px solid rgb(22, 180, 35);
+    /* color: white; */
+    transition: 0.5s;
+}
